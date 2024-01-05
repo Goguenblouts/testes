@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+
+echo "<!DOCTYPE html>
 <html lang="pt">
   <head>
     <link rel="stylesheet" href="globals.css" />
@@ -303,4 +305,6 @@ setInterval(mudarImagem, 5000);
   </script>
 
 </body>
-</html>
+</html>"
+
+?>
