@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Prazo de Vencimento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+
+        #calculator {
+            background-color: #FFD700;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            max-width: 400px; /* Largura máxima */
+            width: 100%;
+        }
+
+        input {
+            width: calc(100% - 20px); /* Largura total, considerando as margens */
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #FF4500;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #FF6347; /* Vermelho mais claro ao passar o mouse */
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="calculator">
+        <h2>Calculadora de Prazo de Vencimento</h2>
+        <label for="emissao">Data de Emissão da Nota:</label>
+        <input type="date" id="emissao" required>
+        <label for="vencimentos">Datas de Vencimento:</label>
+        <input type="date" id="vencimento1" required>
+        <input type="date" id="vencimento2" required>
+        <input type="date" id="vencimento3" required>
+        <input type="date" id="vencimento4" required>
+        <input type="date" id="vencimento5" required>
+        <button onclick="calcularPrazo()">Gerar Prazo</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calcularPrazo() {
+            var dataEmissao = new Date(document.getElementById('emissao').value);
+            var resultElement = document.getElementById('result');
+
+            if (!isNaN(dataEmissao.getTime())) {
+                var prazos = [];
+                for (var i = 1; i <= 5; i++) {
+                    var dataVencimento = new Date(document.getElementById('vencimento' + i).value);
+                    if (!isNaN(dataVencimento.getTime())) {
+                        var diff = Math.floor((dataVencimento - dataEmissao) / (1000 * 60 * 60 * 24));
+                        prazos.push('Vencimento ' + i + ': ' + diff + ' dias');
+                    }
+                }
+
+                resultElement.textContent = prazos.join('\n');
+            } else {
+                resultElement.textContent = 'Por favor, insira uma data de emissão válida.';
+            }
+        }
+    </script>
+</body>
+</html>
